@@ -1,10 +1,12 @@
 use bitcoin::{key::{Secp256k1, UncompressedPublicKeyError}, secp256k1::{All, SecretKey}, Address, CompressedPublicKey, KnownHrp, Network, PrivateKey};
 use rand::{rngs::ThreadRng};
+use serde::{Deserialize, Serialize};
 
+#[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct Wallet {
     prv: PrivateKey,
-    p2pkh_address: String,
-    p2wpkh_address: String
+    pub(crate) p2pkh_address: String,
+    pub(crate) p2wpkh_address: String
 }
 
 impl Wallet {

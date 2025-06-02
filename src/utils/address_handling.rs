@@ -1,7 +1,7 @@
 use bitcoin::AddressType;
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
 
-use super::csv::Record;
+use super::file_handling::Record;
 
 #[derive(Default)]
 pub(crate) struct AddressBucket {

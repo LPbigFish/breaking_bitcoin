@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
-use std::{collections::HashSet, fs::File, io::BufReader};
+use std::{collections::HashSet, fs::File, io::{BufReader, BufWriter, Write}, time};
 use rayon::prelude::*;
+
+use super::wallet::Wallet;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Record {
@@ -51,4 +53,11 @@ pub fn create_address_set_par(record_vec: Vec<Record>) -> HashSet<String> {
         .map(|rec| rec.address)
     );
     result
+}
+
+pub fn write_the_key(wallet: Wallet) {
+    if let Ok(mut file) = File::create(format!("{:?}.{}.json", time::SystemTime::now(), wallet.p2pkh_address)) {
+        let data = serde_json::to_string_pretty(&wallet).expect("Failed to parse wallet data to JSON!");
+        file.write_all(data.as_bytes()).expect("Failed to write wallet data to a file!");
+    }
 }
