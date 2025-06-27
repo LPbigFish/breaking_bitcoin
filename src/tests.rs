@@ -2,7 +2,7 @@ use std::{collections::HashSet, sync::{Arc, RwLock}};
 
 use bitcoin::key::Secp256k1;
 
-use crate::utils::{address_handling::filter_addresses, file_handling::{create_address_set, create_address_set_par, read_from_csv}, kernel::{check_address, gac_range}, wallet::Wallet};
+use crate::utils::{address_handling::filter_addresses, file_handling::{create_address_set, create_address_set_par, read_from_csv}, kernel::{check_address, gac_range}, script::ScriptBuild, wallet::Wallet};
 
 #[test]
 fn create_wallet() {
@@ -90,4 +90,10 @@ fn kernel_check_test() {
     wallet.p2pkh_address = "1K6KoYC69NnafWJ7YgtrpwJxBLiijWqwa6".to_string();
 
     assert_eq!(true, check_address(&par_dataset, &wallet));
+}
+
+#[test]
+fn p2sh_creation() {
+    let s = ScriptBuild::new(0u128);
+    println!("{}", s.to_string());
 }

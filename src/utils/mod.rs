@@ -5,3 +5,5 @@ pub mod file_handling;
 pub mod address_handling;
 
 pub mod kernel;
+
+pub mod script;

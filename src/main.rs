@@ -2,7 +2,7 @@ use std::time;
 
 mod utils;
 
-use utils::file_handling::{create_address_set, create_address_set_par, read_from_csv};
+use utils::file_handling::{create_address_set_par, read_from_csv};
 
 fn main() {
     let mut time = time::Instant::now();
